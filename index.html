@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chessboard from Screenshot</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="500" height="300"></canvas>
+  <img src="https://i.imgur.com/ONSCvsh.jpg"></img>
+  <script>
+
+
+    var imgData;
+    function loadCanvas(imgURL) {
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+
+      // load image from data url
+      var img = new Image();
+      img.onload = function() {
+        var scale = 1.0;
+        var maxWidth = 500;
+        if (img.width > maxWidth) {
+          scale = maxWidth / img.width;
+        }
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        
+        context.drawImage(this, 0, 0, img.width * scale, img.height * scale);
+
+        // Draw box
+        context.fillStyle = "rgba(200, 0, 0, 0.5)";
+        context.fillRect(20, 20, 100, 200);
+
+        imgData = context.getImageData(0, 0, context.width, context.height);
+
+      };
+
+      img.src = imgURL;
+    }
+
+    loadCanvas("https://i.imgur.com/ONSCvsh.jpg");
+
+  </script>
+</body>
+</html>
