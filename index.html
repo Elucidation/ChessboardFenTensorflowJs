@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <title>Chessboard from Screenshot</title>
 </head>
 <body>
   <canvas id="myCanvas" width="500" height="300"></canvas>
   <img src="https://i.imgur.com/ONSCvsh.jpg"></img>
   <script>
+
+    function loadURL(url, method) {
+      $.ajax({
+          type:"GET",
+          url:"https://i.redd.it/khu1361nnl611.jpg",
+          success:method,
+      });
+    }
 
 
     var imgData;
@@ -16,6 +25,7 @@
 
       // load image from data url
       var img = new Image();
+
       img.onload = function() {
         var scale = 1.0;
         var maxWidth = 500;
@@ -31,14 +41,22 @@
         context.fillStyle = "rgba(200, 0, 0, 0.5)";
         context.fillRect(20, 20, 100, 200);
 
-        imgData = context.getImageData(0, 0, context.width, context.height);
+        imgData = context.getImageData(0, 0, canvas.width, canvas.height);
 
       };
 
-      img.src = imgURL;
+      // Make ajax request.
+      loadURL(imgURL,function(data) {
+        console("Processing ajax response, length: ", data.length);
+
+        img.src=data;
+      });
+
     }
 
-    loadCanvas("https://i.imgur.com/ONSCvsh.jpg");
+    // loadCanvas("https://i.imgur.com/ONSCvsh.jpg");
+    // loadCanvas("https://i.imgur.com/NIacXeN.jpg");
+    loadCanvas("https://i.redd.it/khu1361nnl611.jpg");
 
   </script>
 </body>
