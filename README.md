@@ -10,8 +10,6 @@ Given a screenshot which has an online chessboard in it somewhere, it finds the 
 
 This uses a frozen [Tensorflow Chessbot](https://github.com/Elucidation/tensorflow_chessbot/tree/chessfenbot) model. Unlike that repo this runs completely in javascript using TensorflowJs, all client-side.
 
-There are two parts:
-
 ### Board detection
 
 Finds and separates out the chessboard into a 256x256 px image containing the 32x32 tiles of the chessboard.
