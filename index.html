@@ -74,6 +74,7 @@
         img.onload = function() {
           processLoadedImage(img);
           chessboard = runPrediction();
+          console.log('Predicted FEN: ', chessboard.fen);
           updateUI(chessboard);
         }
         img.src = event.target.result;

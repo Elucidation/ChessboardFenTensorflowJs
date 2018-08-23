@@ -46,23 +46,20 @@ function runPrediction(e) {
   const img = document.getElementById('resultCanvas'); // NOTE - global id used here.
   fen_element.innerHTML = "Model currently processing...";
 
+  // Load pixels from aligned/bounded 256x256 px grayscale image canvas.
   const img_data = tf.fromPixels(img).asType('float32');
-
+  
   // The image is loaded as a 256x256x3 pixel array, even though it's grayscale.
   // We just use the first channel since all should be the same.
   // Then, we need to properly reshape the array so that each 32x32 tile becomes a 1024 long row
   // in a [Nx1024] 2d tf array, where N = 64 for the 64 tiles.
   const tiles = getTiles(img_data);
-
   // Run model prediction on tiles.
   const output = predictor.execute({Input: tiles, KeepProb: tf.scalar(1.0)}); // NOTE - global used here.
-
   // Get model prediction.
   const raw_predictions = output.dataSync();
-
   // Get labeled piece array and basic FEN prediction.
   const chessboard = getLabeledPiecesAndFEN(raw_predictions);
-
   return chessboard;
 }
 
@@ -101,8 +98,6 @@ function updateUI(chessboard) {
   updateLichessUrl('lichess_editor_white_inverted', makeLichessEditorURL(reversed_fen) + '_w');
   updateLichessUrl('lichess_editor_black_inverted', makeLichessEditorURL(reversed_fen) + '_b');
 
-  console.log('Basic FEN: ', chessboard.fen);
-  console.log('Lichess analysis url: ', fen_element.href);
 
   // Predicted chessboard visualization img.
   predict_visualization.src = ("http://www.fen-to-image.com/image/32/" + chessboard.fen + ".png");
