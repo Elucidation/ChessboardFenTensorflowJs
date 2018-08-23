@@ -1,6 +1,6 @@
-# Tensorflow Chessboard Prediction from Screenshots in HTML5
+# TensorflowJs Chessboard Prediction from Screenshots in HTML5
 
-Given a screenshot which has an online chessboard in it somewhere, it finds the chessboard and predicts the layout of the pieces on it.
+Given a screenshot which has an online chessboard in it somewhere, it finds the chessboard and predicts the layout of the pieces on it. Everything runs client-side live using [TensorflowJs](https://js.tensorflow.org/)
 
 <img src="readme_input.png" width=300px> <img src="readme_prediction.png" width=300px>
 
@@ -8,7 +8,7 @@ Given a screenshot which has an online chessboard in it somewhere, it finds the 
 
 ## How it works
 
-This uses the [Tensorflow Chessbot](https://github.com/Elucidation/tensorflow_chessbot/tree/chessfenbot) model. Unlike that repo this runs completely in javascript using TensorflowJs, all client-side.
+This uses a frozen [Tensorflow Chessbot](https://github.com/Elucidation/tensorflow_chessbot/tree/chessfenbot) model. Unlike that repo this runs completely in javascript using TensorflowJs, all client-side.
 
 There are two parts:
 
@@ -20,6 +20,7 @@ The image is blurred and then the sobel gradients X and Y are used to find stron
 <img src="readme_gradient_find.png" width=300px>
 
 2. Given 256x256px aligned chessboard image, run TensorflowJs model to predict pieces on it.
+We freeze a model graph and weights from [Tensorflow Chessbot](https://github.com/Elucidation/tensorflow_chessbot/tree/chessfenbot), and load it up in Javascript using [TensorflowJs](https://js.tensorflow.org/), allowing everything to run locally client-side.
 
 <img src="readme_cropped_input.png" width=300px> <img src="readme_prediction.png" width=300px>
 
