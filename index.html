@@ -36,6 +36,7 @@
       <p>
         <input type="file" id="imageLoader" name="imageLoader" accept="image/*"/>
       </p>
+      <div id="example_input">Example input: <img src="readme_cropped_input.png"></img></div>
       <canvas id="uploadedImage"></canvas>
 
       <h3>Gradient Image</h3>
@@ -82,6 +83,7 @@
       reader.onload = function(event){
         var img = new Image();
         img.onload = function() {
+          document.getElementById('example_input').style.display='none';
           processLoadedImage(img);
           chessboard = runPrediction();
           console.log('Predicted FEN: ', chessboard.fen);
