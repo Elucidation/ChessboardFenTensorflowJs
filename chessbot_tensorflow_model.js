@@ -48,7 +48,7 @@ function runPrediction(e) {
 
   // Load pixels from aligned/bounded 256x256 px grayscale image canvas.
   const img_data = tf.fromPixels(img).asType('float32');
-  
+
   // The image is loaded as a 256x256x3 pixel array, even though it's grayscale.
   // We just use the first channel since all should be the same.
   // Then, we need to properly reshape the array so that each 32x32 tile becomes a 1024 long row
@@ -84,19 +84,19 @@ function updateUI(chessboard) {
   }
 
   function updateLichessUrl(id, str) {
-    document.getElementById(id).href = makeLichessAnalysisURL(chessboard.fen)
+    document.getElementById(id).href = str
   }
-  updateLichessUrl('lichess_analysis_white', makeLichessAnalysisURL(chessboard.fen) + '_w');
-  updateLichessUrl('lichess_analysis_black', makeLichessAnalysisURL(chessboard.fen) + '_b');
+  updateLichessUrl('lichess_analysis_white', makeLichessAnalysisURL(chessboard.fen+'_w'));
+  updateLichessUrl('lichess_analysis_black', makeLichessAnalysisURL(chessboard.fen+'_b'));
 
-  updateLichessUrl('lichess_editor_white', makeLichessEditorURL(chessboard.fen) + '_w');
-  updateLichessUrl('lichess_editor_black', makeLichessEditorURL(chessboard.fen) + '_b');
+  updateLichessUrl('lichess_editor_white', makeLichessEditorURL(chessboard.fen+'_w'));
+  updateLichessUrl('lichess_editor_black', makeLichessEditorURL(chessboard.fen+'_b'));
 
-  updateLichessUrl('lichess_analysis_white_inverted', makeLichessAnalysisURL(reversed_fen) + '_w');
-  updateLichessUrl('lichess_analysis_black_inverted', makeLichessAnalysisURL(reversed_fen) + '_b');
+  updateLichessUrl('lichess_analysis_white_inverted', makeLichessAnalysisURL(reversed_fen+'_w'));
+  updateLichessUrl('lichess_analysis_black_inverted', makeLichessAnalysisURL(reversed_fen+'_b'));
 
-  updateLichessUrl('lichess_editor_white_inverted', makeLichessEditorURL(reversed_fen) + '_w');
-  updateLichessUrl('lichess_editor_black_inverted', makeLichessEditorURL(reversed_fen) + '_b');
+  updateLichessUrl('lichess_editor_white_inverted', makeLichessEditorURL(reversed_fen+'_w'));
+  updateLichessUrl('lichess_editor_black_inverted', makeLichessEditorURL(reversed_fen+'_b'));
 
 
   // Predicted chessboard visualization img.
