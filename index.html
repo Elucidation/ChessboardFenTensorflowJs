@@ -25,16 +25,17 @@
   <body>
     <!-- Computer Vision Portion -->
     <div>
-      <h3>Input Image</h3>
+      <h3>Predicting Chessboard layouts from Screenshots using TensorflowJs</h3>
       <p>
         This is a much-simplified version of 
         <a href="https://github.com/Elucidation/tensorflow_chessbot">Tensorflow Chessbot</a>, 
         but running live completely in javascript with TensorflowJs.<br/>
-        You can upload a screenshot of a chessboard here, and it will predict the FEN notation and provide Lichess analysis/editor links. 
+        You can upload a screenshot of a chessboard here, and it will predict the FEN notation and provide Lichess analysis/editor links.<br/>
+        <a href="https://github.com/Elucidation/ChessboardScreenshotHtml5">Source code</a>
       </p>
       <p>For now, the chessboard must be centered, properly aligned and filling almost all of the image. Results will show at the bottom.</p>
       <p>
-        <input type="file" id="imageLoader" name="imageLoader" accept="image/*"/>
+        Input screenshot file: <input type="file" id="imageLoader" name="imageLoader" accept="image/*"/>
       </p>
       <div id="example_input">Example input: <img src="example_input.png" width="300px"></div>
       <canvas id="uploadedImage"></canvas>
