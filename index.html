@@ -10,9 +10,13 @@
       // Load frozen model.
       const frozen_graph = "frozen_model/tensorflowjs_model.pb";
       const weights = "frozen_model/weights_manifest.json";
-      const thing = tf.loadFrozenModel(frozen_graph, weights).then(
+
+      // global model.
+      var predictor;
+
+      tf.loadFrozenModel(frozen_graph, weights).then(
         function(result) {
-          modelLoaded(result);
+          predictor = result;
       });
       console.log("Successfuly loaded tensorflow_chessbot model.");
     </script>

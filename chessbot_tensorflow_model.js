@@ -38,13 +38,6 @@ function getLabeledPiecesAndFEN(predictions) {
   return {piece_array: pieces, fen:basic_fen};
 }
 
-// global model.
-var predictor;
-
-function modelLoaded(model) {
-  predictor = model;
-}
-
 // Globals element id's used: resultCanvas, fen
 // Global variable used: predictor
 function runPrediction(e) {
