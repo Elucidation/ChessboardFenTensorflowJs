@@ -17,12 +17,11 @@ A very simplified chessboard detector is implemented. It requires the board to m
 
 The image is blurred and then the sobel gradients X and Y are used to find strong vertical and horizontal edges in the image corresponding to the chessboard. This is used to guess the bounds of the chessboard, and then generate a 256x256 px grayscale image as input for the tensorflow model.
 
-![gradient](readme_gradient_find.png)
+<img src="readme_gradient_find.png" width=300px>
 
 2. Given 256x256px aligned chessboard image, run TensorflowJs model to predict pieces on it.
 
-![Cropped Input](readme_cropped_input.png)
-![Prediction](readme_prediction.png)
+<img src="readme_cropped_input.png" width=300px> <img src="readme_prediction.png" width=300px>
 
 ## Running locally
 
