@@ -29,15 +29,17 @@
         <a href="https://github.com/Elucidation/ChessboardScreenshotHtml5">Source code</a>. If you run into issues or have suggestions, please add them as an <a href="https://github.com/Elucidation/ChessboardScreenshotHtml5/issues">issue here</a> (or check if there is already one and add a comment).
       </p>
       <p>For now, the chessboard must be centered, properly aligned and filling almost all of the image. Results will show at the bottom.</p>
+      <p id="loading_model_text"><i>Please wait, loading tensorflow model...</i></p>
+    </div>
+    <div id="post_model_loaded" style="display:none"> 
       <p>
         Input screenshot file: <input type="file" id="imageLoader" name="imageLoader" accept="image/*"/>
       </p>
-      <div id="example_input">Example input: <img src="example_input.png" width="300px"></div>
+      <img id='example_input_img' src="example_input.png" width="321px" height="300px" style="display:none">
       <canvas id="uploadedImage"></canvas>
 
       <h3>Gradient Image</h3>
       <p><canvas id="sobelCanvas"></canvas></p>
-    </div>
 
     <!-- Machine Learning Portion -->
     <div>
@@ -75,11 +77,20 @@
       function(result) {
         predictor = result;
         imageLoader.disabled = false; // Enable since model is loaded.
+
+        // Run on default image for now.
+        document.getElementById('post_model_loaded').style.display = 'block'
+        document.getElementById('loading_model_text').style.display = 'none'
+        processLoadedImage(document.getElementById('example_input_img'));
+        chessboard = runPrediction();
+        console.log('Predicted FEN: ', chessboard.fen);
+        updateUI(chessboard);
     });
     console.log("Successfuly loaded tensorflow_chessbot model.");
 
     // Set up image upload.
     var imageLoader = document.getElementById('imageLoader');
+    imageLoader
     imageLoader.disabled = true; // Disabled until model is loaded.
     imageLoader.addEventListener('change', handleImage, false);
 
@@ -90,7 +101,6 @@
       reader.onload = function(event){
         var img = new Image();
         img.onload = function() {
-          document.getElementById('example_input').style.display='none';
           processLoadedImage(img);
           chessboard = runPrediction();
           console.log('Predicted FEN: ', chessboard.fen);
