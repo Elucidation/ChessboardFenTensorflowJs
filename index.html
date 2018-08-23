@@ -27,9 +27,15 @@
     <div>
       <h3>Input Image</h3>
       <p>
-        <input type="file" id="imageLoader" name="imageLoader" accept="image/*"/>
+        This is a much-simplified version of 
+        <a href="https://github.com/Elucidation/tensorflow_chessbot">Tensorflow Chessbot</a>, 
+        but running live completely in javascript with TensorflowJs.<br/>
+        You can upload a screenshot of a chessboard here, and it will predict the FEN notation and provide Lichess analysis/editor links. 
       </p>
       <p>For now, the chessboard must be centered, properly aligned and filling almost all of the image. Results will show at the bottom.</p>
+      <p>
+        <input type="file" id="imageLoader" name="imageLoader" accept="image/*"/>
+      </p>
       <canvas id="uploadedImage"></canvas>
 
       <h3>Gradient Image</h3>
@@ -57,6 +63,10 @@
         </p>
         <img id='visualize' src="">
       </div>
+      <p>
+        Hope you enjoyed this. If there are things you'd like to see, look to see if an issue exists or create a new issue:
+        <a href="https://github.com/Elucidation/ChessboardScreenshotHtml5/issues">ChessboardScreenshotHtml5 Issues</a>
+      </p>
     </div>
   
   </body>
