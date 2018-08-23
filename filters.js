@@ -1,3 +1,4 @@
+// Directly from https://github.com/kig/canvasfilters
 Filters = {};
 
 if (typeof Float32Array == 'undefined') {
