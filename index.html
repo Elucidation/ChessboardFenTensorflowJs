@@ -5,21 +5,6 @@
     <script src="filters.js"></script>
     <script src="chessbot_tensorflow_model.js"></script>
     <script src="chessboard_detection.js"></script>
-
-    <script>
-      // Load frozen model.
-      const frozen_graph = "frozen_model/tensorflowjs_model.pb";
-      const weights = "frozen_model/weights_manifest.json";
-
-      // global model.
-      var predictor;
-
-      tf.loadFrozenModel(frozen_graph, weights).then(
-        function(result) {
-          predictor = result;
-      });
-      console.log("Successfuly loaded tensorflow_chessbot model.");
-    </script>
     
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47993702-2"></script>
@@ -79,8 +64,23 @@
   
   </body>
   <script type="text/javascript" >
+    // Load frozen model.
+    const frozen_graph = "frozen_model/tensorflowjs_model.pb";
+    const weights = "frozen_model/weights_manifest.json";
+
+    // global model.
+    var predictor;
+
+    tf.loadFrozenModel(frozen_graph, weights).then(
+      function(result) {
+        predictor = result;
+        imageLoader.disabled = false; // Enable since model is loaded.
+    });
+    console.log("Successfuly loaded tensorflow_chessbot model.");
+
     // Set up image upload.
     var imageLoader = document.getElementById('imageLoader');
+    imageLoader.disabled = true; // Disabled until model is loaded.
     imageLoader.addEventListener('change', handleImage, false);
 
 
