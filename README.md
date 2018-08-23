@@ -2,7 +2,11 @@
 
 Given a screenshot which has an online chessboard in it somewhere, it finds the chessboard and predicts the layout of the pieces on it.
 
-From ![Input](readme_input.png) -> ![Prediction](readme_prediction.png)
+<img src="readme_input.png" width=300px> <img src="readme_prediction.png" width=300px>
+
+## [Live Demo](http://tetration.xyz/ChessboardFenTensorflowJs/)
+
+## How it works
 
 This uses the [Tensorflow Chessbot](https://github.com/Elucidation/tensorflow_chessbot/tree/chessfenbot) model. Unlike that repo this runs completely in javascript using TensorflowJs, all client-side.
 
@@ -19,10 +23,6 @@ The image is blurred and then the sobel gradients X and Y are used to find stron
 
 ![Cropped Input](readme_cropped_input.png)
 ![Prediction](readme_prediction.png)
-
-## Live demo
-
-You can use this [live here](http://tetration.xyz/ChessboardScreenshotHtml5/)
 
 ## Running locally
 
