@@ -1,10 +1,17 @@
 <html>
   <head>
+    <!-- Material Design Lite https://getmdl.io -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.2.0/material.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <!-- Load TensorFlow.js -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5"> </script>
     <script src="filters.js"></script>
     <script src="chessbot_tensorflow_model.js"></script>
     <script src="chessboard_detection.js"></script>
+
     
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47993702-2"></script>
@@ -41,26 +48,27 @@
       <h3>Gradient Image</h3>
       <p><canvas id="sobelCanvas"></canvas></p>
 
-    <!-- Machine Learning Portion -->
-    <div>
-      <h3>Input to machine learning model</h3>
-      <p><canvas id="resultCanvas"></canvas></p>      
+      <!-- Machine Learning Portion -->
+      <div>
+        <h3>Input to machine learning model</h3>
+        <p><canvas id="resultCanvas"></canvas></p>      
 
-      <h3>Prediction</h3>
-      <div id="prediction_block" style="display:none">
-        <p>
-          Raw Predicted FEN: <div id='fen'>Waiting for image...</div>
-        </p>
-        <p>
-          ◇ White to play : <a href="" id="lichess_analysis_white">Analysis</a> | <a href="" id="lichess_editor_white">Editor</a><br/>
-          ◆ Black to play : <a href="" id="lichess_analysis_black">Analysis</a> | <a href="" id="lichess_editor_black">Editor</a><br/>
-        </p>
-        <p>
-          ▾ Links for when pieces are upside down on the board:<br/>
-          ◇ White to play : <a href="" id="lichess_analysis_white_inverted">Analysis</a> | <a href="" id="lichess_editor_white_inverted">Editor</a><br/>
-          ◆ Black to play : <a href="" id="lichess_analysis_black_inverted">Analysis</a> | <a href="" id="lichess_editor_black_inverted">Editor</a><br/>
-        </p>
-        <img id='visualize' src="">
+        <h3>Prediction</h3>
+        <div id="prediction_block" style="display:none">
+          <p>
+            Raw Predicted FEN: <div id='fen'>Waiting for image...</div>
+          </p>
+          <p>
+            ◇ White to play : <a href="" id="lichess_analysis_white">Analysis</a> | <a href="" id="lichess_editor_white">Editor</a><br/>
+            ◆ Black to play : <a href="" id="lichess_analysis_black">Analysis</a> | <a href="" id="lichess_editor_black">Editor</a><br/>
+          </p>
+          <p>
+            ▾ Links for when pieces are upside down on the board:<br/>
+            ◇ White to play : <a href="" id="lichess_analysis_white_inverted">Analysis</a> | <a href="" id="lichess_editor_white_inverted">Editor</a><br/>
+            ◆ Black to play : <a href="" id="lichess_analysis_black_inverted">Analysis</a> | <a href="" id="lichess_editor_black_inverted">Editor</a><br/>
+          </p>
+          <img id='visualize' src="">
+        </div>
       </div>
     </div>
   
