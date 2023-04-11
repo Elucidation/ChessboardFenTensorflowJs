@@ -4,7 +4,7 @@ Given a screenshot which has an online chessboard in it somewhere, it finds the 
 
 <img src="readme_input.png" width=300px> <img src="readme_prediction.png" width=300px>
 
-## [Live Demo](http://tetration.xyz/ChessboardFenTensorflowJs/)
+## [Live Demo](http://elucidation.github.io/ChessboardFenTensorflowJs/)
 
 ## How it works
 
