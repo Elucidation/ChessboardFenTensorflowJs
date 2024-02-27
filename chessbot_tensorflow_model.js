@@ -68,7 +68,7 @@ function updateUI(chessboard) {
   // Lichess analysis link.
   const fen_element = document.getElementById('fen'); // NOTE - global id used here.
   const prediction_block = document.getElementById('prediction_block'); // NOTE - global id used here.
-  const predict_visualization = document.getElementById('visualize'); // NOTE - global id used here.
+  const predict_visualization = document.getElementById('chessboard'); // NOTE - global id used here.
 
   // Used for when the board is inverted.
   var reversed_fen = chessboard.fen.split("").reverse().join("");
@@ -98,8 +98,9 @@ function updateUI(chessboard) {
   updateLichessUrl('lichess_editor_white_inverted', makeLichessEditorURL(reversed_fen+'_w'));
   updateLichessUrl('lichess_editor_black_inverted', makeLichessEditorURL(reversed_fen+'_b'));
 
-
-  // Predicted chessboard visualization img.
-  predict_visualization.src = ("http://www.fen-to-image.com/image/32/" + chessboard.fen + ".png");
   prediction_block.style.display = "block";
+
+  // Generate chessboard div to visualize prediction.
+  // TODO : Replace with import/export, currently assumes this function exists.
+  rebuildChessboardDiv(predict_visualization, chessboard.fen);
 }

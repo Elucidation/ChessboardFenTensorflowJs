@@ -1,0 +1,26 @@
+#chessboard {
+  font-family: "Chess", sans-serif;
+  display: grid;
+  grid-template-columns: repeat(8, 32px);
+  grid-template-rows: repeat(8, 32px);
+  border-collapse: collapse;
+  margin: 2px;
+}
+
+.square {
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.light-square {
+  background-color: #f0d9b5; /* Light square color */
+}
+
+.dark-square {
+  background-color: #b58863; /* Dark square color */
+}
