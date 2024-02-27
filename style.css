@@ -6,6 +6,25 @@ body {
   line-height: 1.6; /* Adjust spacing between rows */
 }
 
+.container {
+  display: flex; /* Enable flexbox layout */
+  flex-wrap: wrap; /* Allow items to wrap into multiple rows*/
+  justify-content: space-around; /* Distribute space around sections */
+}
+
+.section {
+  width: fit-content;
+  margin-bottom: 20px;
+  
+  padding: 15px;
+}
+
+h3 {
+  /* Style titles */
+  text-align: center;
+}
+
+/* fen2htmldiv styling */
 #chessboard {
   font-family: "Chess", sans-serif;
   display: grid;

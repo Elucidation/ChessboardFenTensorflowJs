@@ -64,7 +64,8 @@ function processLoadedImage(img) {
   // Visualize sobel image.
   sobelCanvas.width = d.width;
   sobelCanvas.height = d.height;
-  sobelCanvas.getContext('2d').putImageData(d, 0, 0);
+  // sobelCanvas.getContext('2d').putImageData(d, 0, 0); // Draw gradient image
+  sobelCanvas.getContext('2d').drawImage(img,0,0, width, height);
 
   // Get squashed X and Y sobels (by summing along columns and rows respectively).
   squashed = squashSobels(d);
