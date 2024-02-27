@@ -60,8 +60,8 @@ function processLoadedImage(img) {
 
   // Blur image, then run sobel filters on it.
   var box_filter_1d = Filters.getFloat32Array([1/5.,1/5.,1/5.,1/5.,1/5.]);
-  var d = Filters.separableConvolve(Filters.getPixels(internalCanvas), box_filter_1d, box_filter_1d, false);
-  // var d = Filters.filterImage(Filters.gaussianBlur, internalCanvas, 25); // gaussian
+  // var d = Filters.separableConvolve(Filters.getPixels(internalCanvas), box_filter_1d, box_filter_1d, false);
+  var d = Filters.filterImage(Filters.gaussianBlur, internalCanvas, 25); // gaussian
   d = Filters.sobel(d);
 
   // Visualize sobel image.
@@ -141,6 +141,7 @@ function processLoadedImage(img) {
   // Build bounded and aligned grayscale 256x256 px chessboard to result canvas for prediction.
   resultCanvasElement.width = 256;
   resultCanvasElement.height = 256;
+  resultCanvasElement.getContext('2d').imageSmoothingQuality="high";
 
   // Get cropped grayscale of original image as a 256x256px image of just the chessboard.
   var bbox_width = bbox.tr.x - bbox.tl.x;
