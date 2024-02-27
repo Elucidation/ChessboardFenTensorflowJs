@@ -16,15 +16,16 @@ function findMax(arr, a, b) {
 function squashSobels(pixels) {
   var w = pixels.width;
   var h = pixels.height;
-  var d = pixels.data;
-  scoreX = new Int32Array(w);
-  scoreY = new Int32Array(h);
+  var d = new Float32Array(pixels.data);
+  scoreX = new Float32Array(w);
+  scoreY = new Float32Array(h);
   buffer = 0; // only use central bit of image
   for (var y=buffer; y<h-buffer; y++) {
     for (var x=buffer; x<w-buffer; x++) {
       var off = (y*w+x)*4;
-      scoreX[x] += d[off];
-      scoreY[y] += d[off+1]
+      // Log space so we don't overweight sharp gradients too much
+      scoreX[x] += Math.log(d[off] + 1);
+      scoreY[y] += Math.log(d[off+1] + 1);
     }
   }
   return {x:scoreX, y:scoreY}
@@ -49,6 +50,9 @@ function processLoadedImage(img) {
   var internalCanvas = document.createElement('canvas');
   var width = 512;
   var height = Math.floor((img.height * width) / img.width);
+  if (height % 2 != 0) {
+    height += 1; // Make sure height is even also, simplifies the rest.
+  }
   var scale_factor = img.width / width;
   internalCanvas.width = width;
   internalCanvas.height = height; // purposefully want a square
@@ -61,7 +65,7 @@ function processLoadedImage(img) {
   // Blur image, then run sobel filters on it.
   // var box_filter_1d = Filters.getFloat32Array([1/5.,1/5.,1/5.,1/5.,1/5.]);
   // var d = Filters.separableConvolve(Filters.getPixels(internalCanvas), box_filter_1d, box_filter_1d, false);
-  var d = Filters.filterImage(Filters.gaussianBlur, internalCanvas, 25); // gaussian
+  var d = Filters.filterImage(Filters.gaussianBlur, internalCanvas, 5); // gaussian
   d = Filters.sobel(d);
 
   // Visualize sobel image.
@@ -72,7 +76,7 @@ function processLoadedImage(img) {
 
   // Get squashed X and Y sobels (by summing along columns and rows respectively).
   squashed = squashSobels(d);
-  // Since our image width is forced to 512px, we assume a chessboard is at least half of the image, up to exactly the image
+  // Since our image width is forced to 512px width, we assume a chessboard is at least half of the image, up to exactly the image
   // This comes out to 32-64 pixels per tile, so we only look for deltas between lines in the range 31-65 pixels.
 
   // We will non-max supress everything more than 20 pixels away from the strongest lines.
@@ -82,21 +86,23 @@ function processLoadedImage(img) {
   var winsize = 30;
   // Find max in center X.
   var ctrX = findMax(squashed.x, Math.floor(width/2)-winsize, Math.floor(width/2)+winsize);
-  // Find next max to the right.
+  // Find nearest max to the left and right.
+  var leftX = findMax(squashed.x, ctrX.idx-65, ctrX.idx-31);
   var rightX = findMax(squashed.x, ctrX.idx+31, ctrX.idx+65);
 
   // Find max in center Y.
   var ctrY = findMax(squashed.y, Math.floor(height/2)-winsize, Math.floor(height/2)+winsize);
-  // Find next max to the bottom.
+  // Find nearest max to the bottom and top.
   var botY = findMax(squashed.y, ctrY.idx+31, ctrY.idx+65);
+  var topY = findMax(squashed.y, ctrY.idx-65, ctrY.idx-31);
 
-  var deltaX = rightX.idx - ctrX.idx;
-  var deltaY = botY.idx - ctrY.idx;
+  // Estimate tile delta from 2 tiles width.
+  var deltaX = (rightX.idx - leftX.idx)/2;
+  var deltaY = (botY.idx - topY.idx)/2;
 
   // Assumes ctrX.idx is the center, there are 4 to the left and 4 to the right.
   positionsX = Array(9).fill(0).map((e,i)=>(i-4) * deltaX + ctrX.idx);
   positionsY = Array(9).fill(0).map((e,i)=>(i-4) * deltaY + ctrY.idx);
-
 
   // Overlay lines onto sobel image.
   ctx.beginPath();
