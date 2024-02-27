@@ -59,7 +59,7 @@ function processLoadedImage(img) {
 
 
   // Blur image, then run sobel filters on it.
-  var box_filter_1d = Filters.getFloat32Array([1/5.,1/5.,1/5.,1/5.,1/5.]);
+  // var box_filter_1d = Filters.getFloat32Array([1/5.,1/5.,1/5.,1/5.,1/5.]);
   // var d = Filters.separableConvolve(Filters.getPixels(internalCanvas), box_filter_1d, box_filter_1d, false);
   var d = Filters.filterImage(Filters.gaussianBlur, internalCanvas, 25); // gaussian
   d = Filters.sobel(d);
@@ -147,7 +147,7 @@ function processLoadedImage(img) {
   var bbox_width = bbox.tr.x - bbox.tl.x;
   var bbox_height = bbox.bl.y - bbox.tl.y;
   resultCanvasElement.getContext('2d').drawImage(
-    Filters.toCanvas(Filters.filterImage(Filters.grayscale,img)), 
+    img, 
     bbox.tl.x * scale_factor, bbox.tl.y * scale_factor,
     bbox_width * scale_factor, bbox_height * scale_factor,
     0, 0, 256, 256);
