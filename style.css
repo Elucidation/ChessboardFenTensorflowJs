@@ -1,10 +1,19 @@
+body {
+  font-family: monospace; /* Fixed-width font for better alignment */
+  background-color: #f0f0f0; /* Light background */
+  color: #333; /* Dark text color */
+  text-align: center;
+  line-height: 1.6; /* Adjust spacing between rows */
+}
+
 #chessboard {
   font-family: "Chess", sans-serif;
   display: grid;
+  width: fit-content;
   grid-template-columns: repeat(8, 32px);
   grid-template-rows: repeat(8, 32px);
   border-collapse: collapse;
-  margin: 2px;
+  margin: 20px auto;
 }
 
 .square {
