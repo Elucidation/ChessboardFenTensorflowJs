@@ -36,6 +36,7 @@ function findLines(squashed) {
   // TODO.
 }
 
+
 // Global ids used: uploadedImage, resultCanvas, sobelCanvas
 function processLoadedImage(img) {
   console.log("Processing image...");
@@ -45,9 +46,10 @@ function processLoadedImage(img) {
   var ctx = sobelCanvas.getContext('2d');
 
   // Resize the image
-  var internalCanvas = document.createElement('canvas'),
-      width = 512,
-      height = Math.floor((img.height * width) / img.width);
+  var internalCanvas = document.createElement('canvas');
+  var width = 512;
+  var height = Math.floor((img.height * width) / img.width);
+  var scale_factor = img.width / width;
   internalCanvas.width = width;
   internalCanvas.height = height; // purposefully want a square
   internalCanvas.getContext('2d').drawImage(img, 0, 0, width, height);
@@ -138,6 +140,13 @@ function processLoadedImage(img) {
   // Build bounded and aligned grayscale 256x256 px chessboard to result canvas for prediction.
   resultCanvasElement.width = 256;
   resultCanvasElement.height = 256;
-  var gray_img = Filters.toCanvas(Filters.filterImage(Filters.grayscale, internalCanvas));
-  resultCanvasElement.getContext('2d').drawImage(gray_img,bbox.tl.x,bbox.tl.y, deltaX*8, deltaY*8, 0, 0, 256, 256);
+
+  // Get cropped grayscale of original image as a 256x256px image of just the chessboard.
+  var bbox_width = bbox.tr.x - bbox.tl.x;
+  var bbox_height = bbox.bl.y - bbox.tl.y;
+  resultCanvasElement.getContext('2d').drawImage(
+    Filters.toCanvas(Filters.filterImage(Filters.grayscale,img)), 
+    bbox.tl.x * scale_factor, bbox.tl.y * scale_factor,
+    bbox_width * scale_factor, bbox_height * scale_factor,
+    0, 0, 256, 256);
 }
