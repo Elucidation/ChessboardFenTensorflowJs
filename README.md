@@ -2,7 +2,7 @@
 
 Given a screenshot of a chessboard from lichess.org/chess.com, it tries to find the chessboard and pieces on it, [*Try it yourself*](http://elucidation.github.io/ChessboardFenTensorflowJs/).
 
-![image](https://github.com/Elucidation/ChessboardFenTensorflowJs/assets/434925/1d348bb4-c915-413c-a3e2-cc07c70e7192)
+![image](https://github.com/Elucidation/ChessboardFenTensorflowJs/assets/434925/c6b0b2a3-452e-49b9-b59b-dd41efad217c)
 
 ## How it works
 
@@ -25,9 +25,7 @@ The model was trained using 32x32 px grayscale tiles of chessboard pieces. For e
 
 We freeze the model graph and weights from [Tensorflow Chessbot](https://github.com/Elucidation/tensorflow_chessbot/tree/chessfenbot), and load it up in Javascript using TensorflowJs, allowing everything to run without a server.
 
-![image](https://github.com/Elucidation/ChessboardFenTensorflowJs/assets/434925/24e1c90b-1f94-4f60-8dcf-bb7f8065b4b3)
-
-
+![image](https://github.com/Elucidation/ChessboardFenTensorflowJs/assets/434925/ca922b19-5d97-48dd-9bf5-4cffe56db79d)
 
 ## Running locally
 
