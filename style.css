@@ -24,6 +24,10 @@ h3 {
   text-align: center;
 }
 
+canvas {
+    max-width: 256px;
+}
+
 /* fen2htmldiv styling */
 #chessboard {
   font-family: "Chess", sans-serif;
