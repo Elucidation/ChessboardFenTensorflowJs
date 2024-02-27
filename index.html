@@ -31,19 +31,18 @@
     <div>
       <h3>Predicting Chessboard layouts from Screenshots using TensorflowJs</h3>
       <p>
-        This is a much-simplified version of 
+        This is a simplified version of 
         <a href="https://github.com/Elucidation/tensorflow_chessbot">Tensorflow Chessbot</a>, 
-        but running live completely in javascript with TensorflowJs.<br/>
-        You can upload a screenshot of a chessboard here, and it will predict the FEN notation and provide Lichess analysis/editor links.<br/>
-        <a href="https://github.com/Elucidation/ChessboardScreenshotHtml5">Source code</a>. If you run into issues or have suggestions, please add them as an <a href="https://github.com/Elucidation/ChessboardScreenshotHtml5/issues">issue here</a> (or check if there is already one and add a comment).
+        running live, client-side in Javascript with TensorflowJs. <a href="https://github.com/Elucidation/ChessboardScreenshotHtml5">Source code</a>.<br/>
+        You can upload a screenshot of a lichess.org/chess.com chessboard here, and it will predict the FEN notation and provide Lichess analysis/editor links.<br/>
       </p>
-      <p>For now, the chessboard must be centered, properly aligned and filling almost all of the image. Results will show at the bottom.</p>
       <p id="loading_model_text"><i>Please wait, loading tensorflow model...</i></p>
     </div>
     <div id="post_model_loaded" style="display:none"> 
       <p>
         Input screenshot file: <input type="file" id="imageLoader" name="imageLoader" accept="image/*"/>
       </p>
+      <p>The chessboard must be centered and fill most of the image. Results show below.</p>
       <div class="container">
         <!-- Computer Vision Portion -->
         <div class="section">
@@ -80,6 +79,10 @@
         </div>
       </div>
     </div>
+
+    <p>
+      If you run into issues or have suggestions, please add them as an <a href="https://github.com/Elucidation/ChessboardScreenshotHtml5/issues">issue here</a> (or check if there is already one and add a comment).
+    </p>
   
   </body>
   <script type="text/javascript" >
