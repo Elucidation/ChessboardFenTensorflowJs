@@ -85,6 +85,14 @@
   
   </body>
   <script type="text/javascript" >
+
+    function processImage(img) { 
+      processLoadedImage(img);
+      const chessboard = runPrediction();
+      console.log('Predicted FEN: ', chessboard.fen);
+      updateUI(chessboard);
+    }
+
     // Load frozen model.
     const frozen_graph = "frozen_model/tensorflowjs_model.pb";
     const weights = "frozen_model/weights_manifest.json";
@@ -100,10 +108,7 @@
         // Run on default image for now.
         document.getElementById('post_model_loaded').style.display = 'block'
         document.getElementById('loading_model_text').style.display = 'none'
-        processLoadedImage(document.getElementById('example_input_img'));
-        chessboard = runPrediction();
-        console.log('Predicted FEN: ', chessboard.fen);
-        updateUI(chessboard);
+        processImage(document.getElementById('example_input_img')); 
     });
     console.log("Successfuly loaded tensorflow_chessbot model.");
 
@@ -113,17 +118,12 @@
     imageLoader.disabled = true; // Disabled until model is loaded.
     imageLoader.addEventListener('change', handleImage, false);
 
-
-
     function handleImage(e){
       var reader = new FileReader();
       reader.onload = function(event){
         var img = new Image();
         img.onload = function() {
-          processLoadedImage(img);
-          chessboard = runPrediction();
-          console.log('Predicted FEN: ', chessboard.fen);
-          updateUI(chessboard);
+          processImage(img); 
         }
         img.src = event.target.result;
       }
