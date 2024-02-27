@@ -59,15 +59,16 @@ function processLoadedImage(img) {
 
 
   // Blur image, then run sobel filters on it.
-  // imgData = Filters.getPixels(internalCanvas);
-  var d = Filters.filterImage(Filters.gaussianBlur, internalCanvas, 15); // Blur it slightly.
+  var box_filter_1d = Filters.getFloat32Array([1/5.,1/5.,1/5.,1/5.,1/5.]);
+  var d = Filters.separableConvolve(Filters.getPixels(internalCanvas), box_filter_1d, box_filter_1d, false);
+  // var d = Filters.filterImage(Filters.gaussianBlur, internalCanvas, 25); // gaussian
   d = Filters.sobel(d);
 
   // Visualize sobel image.
   sobelCanvas.width = d.width;
   sobelCanvas.height = d.height;
-  // sobelCanvas.getContext('2d').putImageData(d, 0, 0); // Draw gradient image
-  sobelCanvas.getContext('2d').drawImage(img,0,0, width, height);
+  // sobelCanvas.getContext('2d').putImageData(d, 0, 0); // Overlay gradient image
+  sobelCanvas.getContext('2d').drawImage(img,0,0, width, height); // Overlay original img
 
   // Get squashed X and Y sobels (by summing along columns and rows respectively).
   squashed = squashSobels(d);
