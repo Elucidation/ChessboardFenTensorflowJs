@@ -28,6 +28,18 @@ canvas {
     max-width: 256px;
 }
 
+#fen {
+  font-size: smaller;
+  user-select: all; /* Select full fen string */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) { 
+  #fen {
+    font-size: xx-small; /* Smaller font size on smaller screens */
+  }
+}
+
 /* fen2htmldiv styling */
 #chessboard {
   font-family: "Chess", sans-serif;
